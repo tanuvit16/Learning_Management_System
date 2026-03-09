@@ -1,0 +1,55 @@
+import React from 'react'
+import { Route, Routes, useMatch } from 'react-router-dom'
+import Home from './pages/student/Home'
+import CourseList from './pages/student/CourseList'
+import CourseDetails from './pages/student/CourseDetails'
+import MyEnrollments from './pages/student/MyEnrollments'
+import Player from './pages/student/Player'
+import Loading from './components/student/Loading'
+import AddCourse from './pages/educator/AddCourse'
+import Dashboard from './pages/educator/Dashboard'
+import Educator from './pages/educator/Educator'
+import MyCourse from './pages/educator/MyCourse'
+import StudentEnrollment from './pages/educator/StudentEnrollment'
+import Navbar from './components/student/Navbar'
+import "quill/dist/quill.snow.css";
+
+const App = () => {
+   const isEducatorRoute = useMatch("/educator/*");
+  return (
+   
+    <div className='text-default min-h-screen bg-white'>
+      {!isEducatorRoute && <Navbar />}
+     
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/Course-list' element={<CourseList />} />
+         <Route path='/Course-list/:input' element={<CourseList />} />
+
+
+        <Route path='/Course/:id' element={<CourseDetails/>} />
+        <Route path='/my-enrollments' element={<MyEnrollments />} />
+        <Route path='/Player/:courseId' element={<Player />} />
+         <Route path='/loading/:path' element={<Loading />} />
+         
+
+       <Route path='/educator' element={<Educator />} >
+          <Route path='/educator' element={<Dashboard />} />
+          <Route path='my-course' element={<MyCourse />} />
+          <Route path='student-enrollment' element={<StudentEnrollment />} />
+          <Route path='add-course' element={<AddCourse />} />
+
+
+       </Route>
+
+
+
+
+
+
+      </Routes>
+    </div>
+  )
+}
+
+export default App
